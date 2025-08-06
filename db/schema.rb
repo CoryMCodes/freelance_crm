@@ -10,9 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_06_191654) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_06_210937) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "client_tags", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_client_tags_on_client_id"
+    t.index ["tag_id"], name: "index_client_tags_on_tag_id"
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.string "company"
+    t.text "address"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_clients_on_user_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.text "content"
+    t.bigint "client_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_notes_on_client_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.string "color"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tags_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,4 +65,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_06_191654) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "client_tags", "clients"
+  add_foreign_key "client_tags", "tags"
+  add_foreign_key "clients", "users"
+  add_foreign_key "notes", "clients"
+  add_foreign_key "notes", "users"
+  add_foreign_key "tags", "users"
 end

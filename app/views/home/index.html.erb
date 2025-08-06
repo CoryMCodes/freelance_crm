@@ -7,10 +7,10 @@
       <p class="text-gray-600 mb-4">Manage your clients, projects, and invoices all in one place.</p>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div class="bg-blue-50 p-4 rounded-lg">
+        <%= link_to clients_path, class: "bg-blue-50 p-4 rounded-lg hover:bg-blue-100 transition-colors" do %>
           <h3 class="font-semibold text-blue-800">Clients</h3>
           <p class="text-sm text-blue-600">Manage your client relationships</p>
-        </div>
+        <% end %>
         <div class="bg-green-50 p-4 rounded-lg">
           <h3 class="font-semibold text-green-800">Projects</h3>
           <p class="text-sm text-green-600">Track project progress and tasks</p>
@@ -19,12 +19,6 @@
           <h3 class="font-semibold text-purple-800">Invoices</h3>
           <p class="text-sm text-purple-600">Create and manage invoices</p>
         </div>
-      </div>
-      
-      <div class="flex space-x-4">
-        <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
-          Get Started
-        </a>
       </div>
     </div>
   </div>

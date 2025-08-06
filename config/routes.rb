@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
-  get "home/index"
+  get "tags/index"
+  get "tags/create"
+  get "tags/destroy"
+  get "notes/create"
+  get "notes/destroy"
+  # Devise routes for authentication
   devise_for :users
+
+  # Client management routes
+  resources :clients do
+    resources :notes, only: [ :create, :destroy ]
+  end
+  resources :tags, only: [ :index, :create, :destroy ]
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

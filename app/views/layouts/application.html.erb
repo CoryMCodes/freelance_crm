@@ -19,6 +19,7 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <script src="https://cdn.tailwindcss.com"></script>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -36,7 +37,10 @@
           <div class="flex justify-between h-16">
             <div class="flex items-center">
               <div class="flex-shrink-0">
-                <h1 class="text-xl font-bold text-gray-900">Freelance CRM</h1>
+                <%= link_to "Freelance CRM", root_path, class: "text-xl font-bold text-gray-900 hover:text-blue-600" %>
+              </div>
+              <div class="ml-10 flex space-x-8">
+                <%= link_to "Clients", clients_path, class: "text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" %>
               </div>
             </div>
             
