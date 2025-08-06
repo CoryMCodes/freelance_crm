@@ -29,6 +29,30 @@
     <% if alert %>
       <p class="alert"><%= alert %></p>
     <% end %>
+    
+    <% if user_signed_in? %>
+      <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between h-16">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <h1 class="text-xl font-bold text-gray-900">Freelance CRM</h1>
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+              <span class="text-sm text-gray-700">
+                Welcome, <%= current_user.email %>
+              </span>
+              <%= button_to "Sign Out", destroy_user_session_path, method: :delete, 
+                  class: "bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors text-sm",
+                  form: { data: { turbo_confirm: "Are you sure you want to sign out?" } } %>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <% end %>
+    
     <%= yield %>
   </body>
 </html>
