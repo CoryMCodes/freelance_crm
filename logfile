@@ -1,0 +1,10 @@
+2025-08-06 14:24:21.886 MDT [71115] LOG:  starting PostgreSQL 16.9 (Homebrew) on aarch64-apple-darwin23.6.0, compiled by Apple clang version 16.0.0 (clang-1600.0.26.6), 64-bit
+2025-08-06 14:24:21.888 MDT [71115] LOG:  could not bind IPv6 address "::1": Address already in use
+2025-08-06 14:24:21.888 MDT [71115] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2025-08-06 14:24:21.888 MDT [71115] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2025-08-06 14:24:21.888 MDT [71115] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2025-08-06 14:24:21.888 MDT [71115] WARNING:  could not create listen socket for "localhost"
+2025-08-06 14:24:21.888 MDT [71115] FATAL:  could not create any TCP/IP sockets
+2025-08-06 14:24:21.888 MDT [71115] LOG:  database system is shut down
+2025-08-06 14:39:56.713 MDT [73035] FATAL:  lock file "postmaster.pid" already exists
+2025-08-06 14:39:56.713 MDT [73035] HINT:  Is another postmaster (PID 72913) running in data directory "/opt/homebrew/var/postgresql@16"?
