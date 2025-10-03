@@ -38,16 +38,61 @@
               <% end %>
             </div>
 
-            <% if client.tags.any? %>
-              <div class="flex flex-wrap gap-2 mb-4">
+            <div class="mb-4" data-controller="tags" data-tags-client-id-value="<%= client.id %>">
+              <div class="flex flex-wrap gap-2 mb-2" data-tags-target="list">
                 <% client.tags.each do |tag| %>
-                  <span class="px-2 py-1 text-xs rounded-full" 
-                        style="background-color: <%= tag.color %>20; color: <%= tag.color %>;">
+                  <span class="tag-item inline-flex items-center px-2 py-1 text-xs rounded-full mr-2 mb-2" 
+                        style="background-color: <%= tag.color %>20; color: <%= tag.color %>;"
+                        data-tag-id="<%= tag.id %>"
+                        data-tag-name="<%= tag.name %>">
                     <%= tag.name %>
+                    <button data-action="click->tags#removeTag" 
+                            data-tag-id="<%= tag.id %>" 
+                            class="ml-1 text-xs hover:opacity-75">
+                      ×
+                    </button>
                   </span>
                 <% end %>
               </div>
-            <% end %>
+              
+              <!-- Add Tag Form -->
+              <div class="hidden" data-tags-target="form">
+                <form action="<%= client_tags_path(client) %>" 
+                      method="post" 
+                      data-action="submit->tags#addTag"
+                      class="flex items-center space-x-2">
+                  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                  <select name="tag_id" 
+                          data-tags-target="input"
+                          class="text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <option value="">Select a tag...</option>
+                    <% current_user.tags.ordered.each do |tag| %>
+                      <% unless client.tags.include?(tag) %>
+                        <option value="<%= tag.id %>" 
+                                style="color: <%= tag.color %>;">
+                          <%= tag.name %>
+                        </option>
+                      <% end %>
+                    <% end %>
+                  </select>
+                  <button type="submit" 
+                          class="text-xs bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">
+                    Add
+                  </button>
+                  <button type="button" 
+                          data-action="click->tags#hideAddForm"
+                          class="text-xs text-gray-500 hover:text-gray-700">
+                    Cancel
+                  </button>
+                </form>
+              </div>
+              
+              <!-- Add Tag Button -->
+              <button data-action="click->tags#showAddForm"
+                      class="text-xs text-blue-600 hover:text-blue-800">
+                + Add Tag
+              </button>
+            </div>
 
             <div class="text-sm text-gray-500">
               <%= pluralize(client.notes.count, 'note') %>

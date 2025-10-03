@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # Client management routes
   resources :clients do
     resources :notes, only: [ :create, :destroy ]
+    resources :tags, only: [ :create, :destroy ]
   end
   resources :tags, only: [ :index, :create, :destroy ]
 

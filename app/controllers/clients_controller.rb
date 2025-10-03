@@ -4,6 +4,7 @@ class ClientsController < ApplicationController
 
   def index
     @clients = current_user.clients.ordered
+    @tags = current_user.tags.ordered
   end
 
   def show
